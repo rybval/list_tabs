@@ -9,15 +9,13 @@ function onCreated(tab) {
 }
 
 function onReceivedTabs(tabs) {
-    var url_list = [];
     var activeTabId;
     for (let tab of tabs) {
-        url_list.push(tab.url);
         if (tab.active == true) {
             activeTabId = tab.id;
         }
     }
-   portFromCS.postMessage({urls: url_list});
+   portFromCS.postMessage({tabs: tabs});
 }
 
 function connected(p) {
