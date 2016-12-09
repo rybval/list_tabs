@@ -4,16 +4,22 @@ myPort.onMessage.addListener(function(m) {
     document.body.textContent = "";
     var table = document.createElement("table");
     for (let tab of m.tabs) {
-        createRow(table, tab.title, tab.url);
+        createRow(table, tab.title, tab.url, tab.index);
     }
     document.body.appendChild(table);
 });
 
-function createRow(table, title, url) {
+function createRow(table, title, url, index) {
     var row = table.insertRow(-1);
-    row.appendChild(createTitle(title));
-    row.appendChild(createURL(url));
+    var cell = row.insertCell(0);
+    p = document.createElement("p");
+    p.textContent = "" + index;
+    cell.appendChild(p);
+    cell = row.insertCell(1);
+    cell.appendChild(createTitle(title));
+    cell.appendChild(createURL(url));
 }
+
 
 function createTitle(title) {
     var b = document.createElement("b");
@@ -25,7 +31,7 @@ function createTitle(title) {
 
 function createURL(url) {
     var a = document.createElement("a");
-    a.text = url;
+    a.text = decodeURI(url);
     a.href = url;
     return a;
 }
