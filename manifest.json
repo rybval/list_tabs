@@ -1,20 +1,24 @@
 {
-  "browser_action": {
-    "default_icon": {
-      "32": "icons/button_icon.png"
-    }
-  },
+    "name": "List tabs",
+    "description": "Lists all tabs",
+    "manifest_version": 2,
+    "version": "0.2",
 
-  "description": "Lists all tabs",
-  "manifest_version": 2,
-  "name": "List tabs",
-  "version": "1.0",
+    "icons": {
+        "32": "icon.png"
+    },
 
-  "background": {
-    "scripts": ["list_tabs_firefox.js"]
-  },
+    "permissions": ["tabs", "activeTab"],
 
- "permissions": ["tabs", "activeTab"],
- 
- "web_accessible_resources": ["blank.html"]
+    "background": {
+        "scripts": ["list_tabs.js"]
+    },
+
+    "browser_action": {
+        "default_icon": {
+            "32": "icon.png"
+        }
+    },
+
+    "web_accessible_resources": ["page.html"]
 }

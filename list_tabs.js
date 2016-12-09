@@ -1,7 +1,7 @@
 var portFromCS;
 
 browser.browserAction.onClicked.addListener(function() {
-    browser.tabs.create({active: true, url: "/blank.html"}).then(onCreated);
+    browser.tabs.create({active: true, url: "/page.html"}).then(onCreated);
 });
 
 function onCreated(tab) {
