@@ -1,9 +1,6 @@
-var myPort = browser.runtime.connect();
-
-myPort.onMessage.addListener(function(m) {
-    document.body.textContent = "";
+self.port.on("tabs", function(message) {
     var table = document.createElement("table");
-    for (let tab of m.tabs) {
+    for (let tab of message) {
         createRow(table, tab.title, tab.url, tab.index);
     }
     document.body.appendChild(table);

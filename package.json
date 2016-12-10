@@ -1,0 +1,16 @@
+{
+  "title": "List Tabs",
+  "name": "list_tabs",
+  "version": "0.2",
+  "description": "Lists tabs and provide some operations on them",
+  "main": "index.js",
+  "author": "Valentine Rybin",
+  "engines": {
+    "firefox": ">=38.0a1"
+  },
+  "license": "MIT",
+  "keywords": [
+    "jetpack"
+  ],
+  "icon": "resource://@list_tabs/data/icon-32.png"
+}
