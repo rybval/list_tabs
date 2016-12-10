@@ -31,6 +31,11 @@ tabs.on('open', function(tab){
             });
         }
         worker.port.emit("tabs", tabs_list);
+        worker.port.on("switch-to", switchToTab);
     }
   });
 });
+
+function switchToTab(index) {
+    tabs[index].activate();
+}

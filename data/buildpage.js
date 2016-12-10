@@ -9,14 +9,18 @@ self.port.on("tabs", function(message) {
 function createRow(table, title, url, index) {
     var row = table.insertRow(-1);
     var cell = row.insertCell(0);
-    p = document.createElement("p");
-    p.textContent = "" + index;
-    cell.appendChild(p);
+    nbutton = document.createElement("button");
+    nbutton.textContent = "" + index;
+    nbutton.onclick = handleSwitchToButtonClick;
+    cell.appendChild(nbutton);
     cell = row.insertCell(1);
     cell.appendChild(createTitle(title));
     cell.appendChild(createURL(url));
 }
 
+function handleSwitchToButtonClick() {
+    self.port.emit("switch-to", parseInt(this.textContent));
+}
 
 function createTitle(title) {
     var b = document.createElement("b");
