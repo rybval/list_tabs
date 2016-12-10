@@ -16,10 +16,20 @@ function createRow(table, title, url, index) {
     cell = row.insertCell(1);
     cell.appendChild(createTitle(title));
     cell.appendChild(createURL(url));
+    cell = row.insertCell(2);
+    closeButton = document.createElement("button");
+    closeButton.name = "" + index;
+    closeButton.textContent = "X";
+    closeButton.onclick = onCloseButtonAction;
+    cell.appendChild(closeButton)
 }
 
 function handleSwitchToButtonClick() {
     self.port.emit("switch-to", parseInt(this.textContent));
+}
+
+function onCloseButtonAction() {
+    self.port.emit("close", parseInt(this.name));
 }
 
 function createTitle(title) {

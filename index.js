@@ -32,10 +32,15 @@ tabs.on('open', function(tab){
         }
         worker.port.emit("tabs", tabs_list);
         worker.port.on("switch-to", switchToTab);
+        worker.port.on("close", closeTab);
     }
   });
 });
 
 function switchToTab(index) {
     tabs[index].activate();
+}
+
+function closeTab(index) {
+    tabs[index].close();
 }
