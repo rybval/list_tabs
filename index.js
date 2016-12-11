@@ -16,8 +16,8 @@ function handleClick(state) {
     tabs.open("./page.html");
 }
 
-tabs.on('open', function(tab){
-  tab.on('ready', function(tab){
+tabs.on('open', function(tab) {
+  tab.on('ready', function(tab) {
     if (tab.url == self.data.url("page.html")) {
         var worker = tab.attach({
             contentScriptFile: './buildpage.js'
@@ -27,20 +27,28 @@ tabs.on('open', function(tab){
             tabs_list.push({
                 title: tab.title,
                 url: tab.url,
-                index: tab.index
+                id: tab.id
             });
         }
         worker.port.emit("tabs", tabs_list);
-        worker.port.on("switch-to", switchToTab);
+        worker.port.on("activate", activateTab);
         worker.port.on("close", closeTab);
     }
   });
 });
 
-function switchToTab(index) {
-    tabs[index].activate();
+function activateTab(id) {
+    for (let tab of tabs) {
+        if (tab.id == id) {
+            tab.activate();
+        }
+    }
 }
 
-function closeTab(index) {
-    tabs[index].close();
+function closeTab(id) {
+    for (let tab of tabs) {
+        if (tab.id == id) {
+            tab.close();
+        }
+    }
 }

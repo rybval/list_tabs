@@ -1,35 +1,67 @@
-self.port.on("tabs", function(message) {
+self.port.on("tabs", function(tabs) {
     var table = document.createElement("table");
-    for (let tab of message) {
-        createRow(table, tab.title, tab.url, tab.index);
+    let row = table.insertRow(0);
+
+    var table_headers = ["#", "id", "Title & URL", "Close"];
+
+    for (let i = 0; i < table_headers.length; i++) {
+        let cell = row.insertCell(-1);
+        let b = document.createElement("b");
+        b.textContent = table_headers[i];
+        cell.appendChild(b);
+    }
+
+    for (let i = 0; i < tabs.length; i++) {
+        let tab = tabs[i];
+        createRow(table, tab.title, tab.url, i, tab.id);
     }
     document.body.appendChild(table);
 });
 
-function createRow(table, title, url, index) {
+function createRow(table, title, url, index, id) {
     var row = table.insertRow(-1);
-    var cell = row.insertCell(0);
-    nbutton = document.createElement("button");
-    nbutton.textContent = "" + index;
-    nbutton.onclick = handleSwitchToButtonClick;
-    cell.appendChild(nbutton);
-    cell = row.insertCell(1);
+
+    cell = row.insertCell(-1);
+    cell.appendChild(createActivateButton(index, id));
+
+    cell = row.insertCell(-1);
+    cell.textContent = "" + id;
+
+    cell = row.insertCell(-1);
     cell.appendChild(createTitle(title));
     cell.appendChild(createURL(url));
-    cell = row.insertCell(2);
-    closeButton = document.createElement("button");
-    closeButton.name = "" + index;
-    closeButton.textContent = "X";
-    closeButton.onclick = onCloseButtonAction;
-    cell.appendChild(closeButton)
+
+    cell = row.insertCell(-1);
+    cell.appendChild(createCloseButton(id));
 }
 
-function handleSwitchToButtonClick() {
-    self.port.emit("switch-to", parseInt(this.textContent));
+function onActivateButtonAction() {
+    self.port.emit("activate", this.name);
 }
 
 function onCloseButtonAction() {
-    self.port.emit("close", parseInt(this.name));
+    self.port.emit("close", this.name);
+    this.textContent = "Closed";
+}
+
+function createButton(name, text, handler) {
+    var button = document.createElement("button");
+    button.name = name;
+    button.textContent = text;
+    button.onclick = handler;
+    return button;
+}
+
+function createActivateButton(index, id) {
+    return createButton("" + id,
+                        "" + index,
+                        onActivateButtonAction);
+}
+
+function createCloseButton(id) {
+    return createButton("" + id,
+                        "X",
+                        onCloseButtonAction);
 }
 
 function createTitle(title) {
