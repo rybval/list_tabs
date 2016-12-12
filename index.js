@@ -1,7 +1,7 @@
 var buttons = require('sdk/ui/button/action');
 var tabs = require("sdk/tabs");
 var self = require("sdk/self");
-var mod = require("sdk/page-mod");
+var windows = require("sdk/windows").browserWindows;
 
 var button = buttons.ActionButton({
   id: "list-tabs",
@@ -23,7 +23,7 @@ tabs.on('open', function(tab) {
             contentScriptFile: './buildpage.js'
         });
         tabs_list = [];
-        for (tab of tabs) {
+        for (tab of windows.activeWindow.tabs) {
             tabs_list.push({
                 title: tab.title,
                 url: tab.url,
