@@ -2,7 +2,7 @@ self.port.on("tabs", function(tabs) {
     var table = document.createElement("table");
     let row = table.insertRow(0);
 
-    var table_headers = ["#", "id", "Title & URL", "Close"];
+    var table_headers = ["#", "Title & URL", "Close"];
 
     for (let i = 0; i < table_headers.length; i++) {
         let cell = row.insertCell(-1);
@@ -23,9 +23,6 @@ function createRow(table, title, url, index, id) {
 
     cell = row.insertCell(-1);
     cell.appendChild(createActivateButton(index, id));
-
-    cell = row.insertCell(-1);
-    cell.textContent = "" + id;
 
     cell = row.insertCell(-1);
     cell.appendChild(createTitle(title));
