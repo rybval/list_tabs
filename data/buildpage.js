@@ -1,24 +1,60 @@
-self.port.on("tabs", function(tabs) {
+self.port.on("tabs", createTable);
+
+function createTable(tabs) {
     var table = document.createElement("table");
-    let row = table.insertRow(0);
 
     var table_headers = ["#", "Title & URL", "Close"];
+    createHeaderRow(table, table_headers);
 
-    for (let i = 0; i < table_headers.length; i++) {
+    var pinned_tabs = [];
+    var not_pinned_tabs = [];
+    for (let tab of tabs) {
+        console.log(tab);
+        if (tab.pinned) {
+            pinned_tabs.push(tab);
+        } else {
+            not_pinned_tabs.push(tab);
+        }
+    }
+
+    if (pinned_tabs.length > 0) {
+        createSeparatorRow(table, "Pinned:", table_headers.length);
+        createBunchOfTabRows(table, pinned_tabs);
+        createSeparatorRow(table, "Not pinned:", table_headers.length);
+    }
+
+    createBunchOfTabRows(table, not_pinned_tabs);
+
+    document.body.appendChild(table);
+}
+
+function createHeaderRow(table, headers) {
+    let row = table.insertRow(0);
+    for (let i = 0; i < headers.length; i++) {
         let cell = row.insertCell(-1);
         let b = document.createElement("b");
-        b.textContent = table_headers[i];
+        b.textContent = headers[i];
         cell.appendChild(b);
     }
+}
 
+function createSeparatorRow(table, text, cols) {
+    let row = table.insertRow(-1);
+    let cell = row.insertCell(-1);
+    cell.colSpan = cols;
+    let b = document.createElement("b");
+    b.textContent = text;
+    cell.appendChild(b);
+}
+
+function createBunchOfTabRows(table, tabs) {
     for (let i = 0; i < tabs.length; i++) {
         let tab = tabs[i];
-        createRow(table, tab.title, tab.url, i, tab.id);
+        createTabRow(table, tab.title, tab.url, i, tab.id);
     }
-    document.body.appendChild(table);
-});
+}
 
-function createRow(table, title, url, index, id) {
+function createTabRow(table, title, url, index, id) {
     var row = table.insertRow(-1);
 
     cell = row.insertCell(-1);

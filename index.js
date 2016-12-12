@@ -27,7 +27,8 @@ tabs.on('open', function(tab) {
             tabs_list.push({
                 title: tab.title,
                 url: tab.url,
-                id: tab.id
+                id: tab.id,
+                pinned: tab.isPinned
             });
         }
         worker.port.emit("tabs", tabs_list);
