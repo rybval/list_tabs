@@ -12,7 +12,11 @@
   "keywords": [
     "jetpack"
   ],
-  "icon": "resource://@list_tabs/data/icon-32.png",
+  "icon": {
+    "32": "resource://@list_tabs/data/icon-32.png",
+    "48": "resource://@list_tabs/data/icon-48.png",
+    "64": "resource://@list_tabs/data/icon-64.png"
+  },
   "permissions": {
       "private-browsing": true,
       "multiprocess": true
