@@ -1,0 +1,5 @@
+*.xcf
+*.xpi
+.gitignore
+.jpmignore
+.git/
