@@ -1,0 +1,50 @@
+html * {
+  font-family: Verdana;
+  font-size: small;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+table tr:first-child td:first-child {
+  border-top-left-radius: 10px;
+}
+
+table tr:first-child td:last-child {
+  border-top-right-radius: 10px;
+}
+
+.header {
+  background-color: #ccc;
+  font-weight: bold;
+  font-size: larger;
+  padding: 10px;
+}
+
+tr.tabRow:nth-child(even) {
+  background-color: #eee;
+}
+
+.separator {
+  background-color: #ddd;
+  font-weight: bold;
+  padding: 5px;
+}
+
+td {
+  border-bottom: 1px solid #ddd;
+}
+
+a.tabURL {
+  font-family: monospace;
+  font-weight: normal;
+  color: blue;
+  text-decoration: none;
+  font-size: medium;
+}
+
+.cellButton {
+    display: block;
+    width: 100%;
+}

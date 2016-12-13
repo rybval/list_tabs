@@ -9,7 +9,6 @@ function createTable(tabs) {
     var pinned_tabs = [];
     var not_pinned_tabs = [];
     for (let tab of tabs) {
-        console.log(tab);
         if (tab.pinned) {
             pinned_tabs.push(tab);
         } else {
@@ -32,19 +31,18 @@ function createHeaderRow(table, headers) {
     let row = table.insertRow(0);
     for (let i = 0; i < headers.length; i++) {
         let cell = row.insertCell(-1);
-        let b = document.createElement("b");
-        b.textContent = headers[i];
-        cell.appendChild(b);
+        cell.classList.add("header");
+        cell.textContent = headers[i];
     }
 }
 
 function createSeparatorRow(table, text, cols) {
     let row = table.insertRow(-1);
+    row.classList.add("separator");
     let cell = row.insertCell(-1);
+    cell.classList.add("separator");
     cell.colSpan = cols;
-    let b = document.createElement("b");
-    b.textContent = text;
-    cell.appendChild(b);
+    cell.textContent = text;
 }
 
 function createBunchOfTabRows(table, tabs) {
@@ -56,12 +54,14 @@ function createBunchOfTabRows(table, tabs) {
 
 function createTabRow(table, title, url, index, id) {
     var row = table.insertRow(-1);
+    row.classList.add("tabRow");
 
     cell = row.insertCell(-1);
     cell.appendChild(createActivateButton(index, id));
 
     cell = row.insertCell(-1);
     cell.appendChild(createTitle(title));
+    cell.appendChild(document.createElement("br"));
     cell.appendChild(createURL(url));
 
     cell = row.insertCell(-1);
@@ -83,6 +83,7 @@ function createButton(name, text, handler) {
     button.name = name;
     button.textContent = text;
     button.onclick = handler;
+    button.classList.add("cellButton");
     return button;
 }
 
@@ -99,15 +100,12 @@ function createCloseButton(id) {
 }
 
 function createTitle(title) {
-    var b = document.createElement("b");
-    b.textContent = title;
-    var p = document.createElement("p");
-    p.appendChild(b);
-    return p;
+    return document.createTextNode(title);
 }
 
 function createURL(url) {
     var a = document.createElement("a");
+    a.classList.add("tabURL");
     a.text = decodeURI(url);
     a.href = url;
     return a;
