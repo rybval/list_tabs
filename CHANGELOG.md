@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
+## [Unreleased]
+### Changed
+- Style
+
 ## [1.1] — 2016-12-13
 ### Added
 - Private windows support.
@@ -22,4 +26,5 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 ### Added
 - Page, contaning table with information about tabs and some tools.
 
+[Unreleased]: https://github.com/rybval/list_tabs/compare/v1.1...HEAD
 [1.1]: https://github.com/rybval/list_tabs/compare/v1.0...v1.1

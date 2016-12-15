@@ -37,11 +37,10 @@ td {
 }
 
 a.tabURL {
-  font-family: monospace;
+  font-family: consolas, monospace;
   font-weight: normal;
   color: blue;
   text-decoration: none;
-  font-size: medium;
 }
 
 .cellButton {
