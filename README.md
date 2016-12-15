@@ -14,4 +14,5 @@ Available operations:
 - close
 
 Screenshot:
-![Screenshot](https://raw.githubusercontent.com/rybval/list_tabs/a05459dae42134857b65b67389fff78e0f1d2830/screenshot.png "Screenshot")
+
+![Screenshot](https://github.com/rybval/list_tabs/raw/95b6332dd7ca72b3fb2281afa9adfeb74f3041b0/screenshot.png "Screenshot")
