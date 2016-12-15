@@ -5,7 +5,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
 ### Changed
-- Style
+- Table now stretchs to the window width.
+- Some changes in table style.
+- Close button moved to the left.
 
 ## [1.1] — 2016-12-13
 ### Added
