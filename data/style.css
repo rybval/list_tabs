@@ -5,6 +5,7 @@ html * {
 
 table {
   border-collapse: collapse;
+  width: 100%;
 }
 
 table tr:first-child td:first-child {
@@ -20,9 +21,10 @@ table tr:first-child td:last-child {
   font-weight: bold;
   font-size: larger;
   padding: 10px;
+  border-bottom: 1px solid #bbb;
 }
 
-tr.tabRow:nth-child(even) {
+tr.tab:nth-child(even) {
   background-color: #eee;
 }
 
@@ -30,9 +32,10 @@ tr.tabRow:nth-child(even) {
   background-color: #ddd;
   font-weight: bold;
   padding: 5px;
+  border-bottom: 1px solid #ccc;
 }
 
-td {
+td.tab {
   border-bottom: 1px solid #ddd;
 }
 
@@ -44,6 +47,6 @@ a.tabURL {
 }
 
 .cellButton {
-    display: block;
-    width: 100%;
+  display: block;
+  width: 100%;
 }

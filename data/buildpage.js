@@ -54,17 +54,20 @@ function createBunchOfTabRows(table, tabs) {
 
 function createTabRow(table, title, url, index, id) {
     var row = table.insertRow(-1);
-    row.classList.add("tabRow");
+    row.classList.add("tab");
 
     cell = row.insertCell(-1);
+    cell.classList.add("tab");
     cell.appendChild(createActivateButton(index, id));
 
     cell = row.insertCell(-1);
+    cell.classList.add("tab");
     cell.appendChild(createTitle(title));
     cell.appendChild(document.createElement("br"));
     cell.appendChild(createURL(url));
 
     cell = row.insertCell(-1);
+    cell.classList.add("tab");
     cell.appendChild(createCloseButton(id));
 }
 
