@@ -3,7 +3,7 @@ self.port.on("tabs", createTable);
 function createTable(tabs) {
     var table = document.createElement("table");
 
-    var table_headers = ["#", "Title & URL", "Close"];
+    var table_headers = ["#", "X", "Title & URL"];
     createHeaderRow(table, table_headers);
 
     var pinned_tabs = [];
@@ -62,13 +62,13 @@ function createTabRow(table, title, url, index, id) {
 
     cell = row.insertCell(-1);
     cell.classList.add("tab");
-    cell.appendChild(createTitle(title));
-    cell.appendChild(document.createElement("br"));
-    cell.appendChild(createURL(url));
+    cell.appendChild(createCloseButton(id));
 
     cell = row.insertCell(-1);
     cell.classList.add("tab");
-    cell.appendChild(createCloseButton(id));
+    cell.appendChild(createTitle(title));
+    cell.appendChild(document.createElement("br"));
+    cell.appendChild(createURL(url));
 }
 
 function onActivateButtonAction() {
