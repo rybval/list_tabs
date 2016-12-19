@@ -3,7 +3,9 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
-## [1.2]
+## [Unreleased]
+
+## [1.2] — 2016-12-20
 ### Changed
 - Table now stretchs to the window width.
 - Some changes in table style.
@@ -28,5 +30,6 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 ### Added
 - Page, contaning table with information about tabs and some tools.
 
+[Unreleased]: https://github.com/rybval/list_tabs/compare/v1.2...HEAD
 [1.2]: https://github.com/rybval/list_tabs/compare/v1.1...v1.2
 [1.1]: https://github.com/rybval/list_tabs/compare/v1.0...v1.1
