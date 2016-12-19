@@ -77,7 +77,6 @@ function onActivateButtonAction() {
 
 function onCloseButtonAction() {
     self.port.emit("close", this.name);
-    this.textContent = "Closed";
     this.disabled = true;
 }
 
