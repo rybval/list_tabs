@@ -13,43 +13,43 @@ var button = buttons.ActionButton({
 });
 
 function handleClick(state) {
-    tabs.open("./page.html");
+  tabs.open("./page.html");
 }
 
 tabs.on('open', function(tab) {
   tab.on('ready', function(tab) {
     if (tab.url == self.data.url("page.html")) {
-        var worker = tab.attach({
-            contentScriptFile: './buildpage.js'
+      var worker = tab.attach({
+        contentScriptFile: './buildpage.js'
+      });
+      tabs_list = [];
+      for (tab of windows.activeWindow.tabs) {
+        tabs_list.push({
+          title: tab.title,
+          url: tab.url,
+          id: tab.id,
+          pinned: tab.isPinned
         });
-        tabs_list = [];
-        for (tab of windows.activeWindow.tabs) {
-            tabs_list.push({
-                title: tab.title,
-                url: tab.url,
-                id: tab.id,
-                pinned: tab.isPinned
-            });
-        }
-        worker.port.emit("tabs", tabs_list);
-        worker.port.on("activate", activateTab);
-        worker.port.on("close", closeTab);
+      }
+      worker.port.emit("tabs", tabs_list);
+      worker.port.on("activate", activateTab);
+      worker.port.on("close", closeTab);
     }
   });
 });
 
 function activateTab(id) {
-    for (let tab of tabs) {
-        if (tab.id == id) {
-            tab.activate();
-        }
+  for (let tab of tabs) {
+    if (tab.id == id) {
+      tab.activate();
     }
+  }
 }
 
 function closeTab(id) {
-    for (let tab of tabs) {
-        if (tab.id == id) {
-            tab.close();
-        }
+  for (let tab of tabs) {
+    if (tab.id == id) {
+      tab.close();
     }
+  }
 }
