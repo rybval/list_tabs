@@ -56,19 +56,19 @@ function createTabRow(table, title, url, index, id) {
   var row = table.insertRow(-1);
   row.classList.add("tab");
 
-  cell = row.insertCell(-1);
-  cell.classList.add("tab");
-  cell.appendChild(createActivateButton(index, id));
+  getNewTabCell(row).appendChild(createActivateButton(index, id));
+  getNewTabCell(row).appendChild(createCloseButton(id));
 
-  cell = row.insertCell(-1);
-  cell.classList.add("tab");
-  cell.appendChild(createCloseButton(id));
-
-  cell = row.insertCell(-1);
-  cell.classList.add("tab");
+  cell = getNewTabCell(row);
   cell.appendChild(createTitle(title));
   cell.appendChild(document.createElement("br"));
   cell.appendChild(createURL(url));
+}
+
+function getNewTabCell(row) {
+  cell = row.insertCell(-1);
+  cell.classList.add("tab");
+  return cell;
 }
 
 function onActivateButtonAction() {
