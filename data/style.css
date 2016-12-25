@@ -17,26 +17,26 @@ table tr:first-child td:last-child {
 }
 
 .header {
-  background-color: #ccc;
+  background-color: #E8E8E8;
   font-weight: bold;
   font-size: larger;
   padding: 10px;
-  border-bottom: 1px solid #bbb;
+  border-bottom: 1px solid #E0E0E0;
 }
 
 tr.tab:nth-child(even) {
-  background-color: #eee;
+  background-color: #F8F8F8;
 }
 
 .separator {
-  background-color: #ddd;
+  background-color: #F0F0F0;
   font-weight: bold;
   padding: 5px;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #E8E8E8;
 }
 
 td.tab {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #E8E8E8;
 }
 
 a.tabURL {
