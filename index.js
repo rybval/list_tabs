@@ -2,6 +2,7 @@ var buttons = require('sdk/ui/button/action');
 var tabs = require("sdk/tabs");
 var self = require("sdk/self");
 var windows = require("sdk/windows").browserWindows;
+let { getFavicon } = require("sdk/places/favicon");
 
 var button = buttons.ActionButton({
   id: "list-tabs",
@@ -34,6 +35,15 @@ tabs.on('open', function(tab) {
       worker.port.emit("tabs", tabs_list);
       worker.port.on("activate", activateTab);
       worker.port.on("close", closeTab);
+      worker.port.on("getFavicon", function(pageUrl) {
+        getFavicon(pageUrl, function(faviconUrl) {
+          console.log(worker);
+          worker.port.emit("favicon", {
+            url: pageUrl,
+            favicon: faviconUrl
+          });
+        });
+      });
     }
   });
 });

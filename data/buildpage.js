@@ -1,9 +1,10 @@
 self.port.on("tabs", createTable);
+self.port.on("favicon", onFavicon);
 
 function createTable(tabs) {
   var table = document.createElement("table");
 
-  var table_headers = ["#", "X", "Title & URL"];
+  var table_headers = ["#", "X", "", "Title & URL"];
   createHeaderRow(table, table_headers);
 
   var pinned_tabs = [];
@@ -58,6 +59,7 @@ function createTabRow(table, title, url, index, id) {
 
   getNewTabCell(row).appendChild(createActivateButton(index, id));
   getNewTabCell(row).appendChild(createCloseButton(id));
+  getNewTabCell(row).appendChild(createFavicon(url));
 
   cell = getNewTabCell(row);
   cell.appendChild(createTitle(title));
@@ -111,4 +113,21 @@ function createURL(url) {
   a.text = decodeURI(url);
   a.href = url;
   return a;
+}
+
+function createFavicon(url) {
+  var img = document.createElement("img");
+  img.id = url;
+  img.src = "";
+  img.height = 16;
+  img.width = 16;
+  self.port.emit("getFavicon", url);
+  return img;
+}
+
+function onFavicon(obj) {
+  console.log("onFavicon called");
+  img = document.getElementById(obj.url);
+  img.id = null;
+  img.src = obj.favicon;
 }
