@@ -5,7 +5,8 @@ Lists tabs and provide some operations on them
 Displaying info:
 
 - position in window
-- Title
+- favicon
+- title
 - URL
 
 Available operations:
@@ -15,4 +16,4 @@ Available operations:
 
 Screenshot:
 
-![Screenshot](https://github.com/rybval/list_tabs/raw/95b6332dd7ca72b3fb2281afa9adfeb74f3041b0/screenshot.png "Screenshot")
+![Screenshot](https://raw.githubusercontent.com/rybval/list_tabs/024a66cd5640d9bfba6930b40600ce81bb00d395/screenshot.png "Screenshot")
