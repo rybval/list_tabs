@@ -13,6 +13,7 @@ Available operations:
 
 - make active
 - close
+- add to bookmarks
 
 Screenshot:
 

@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
+## [Unreleased]
+### Added
+- Tabs now can be filtered by URL using RegExp.
+- Column with "Add to bookmarks" buttons.
+
 ## 2.0.0 — 2018.09.30
 ### Changed
 - The extension migrated from Add-on API to WebExtension API.

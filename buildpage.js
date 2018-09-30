@@ -1,22 +1,34 @@
 let tabs_cache;
 browser.tabs.query({currentWindow: true}).then(tabs => {
   tabs_cache = tabs;
-  createTable(tabs);
+  buildTable(tabs);
 });
 
-function createTable(tabs) {
-  var table = document.createElement("table");
+document.getElementById('update').onclick = update;
 
-  var table_headers = ["#", "X", "", "Title & URL"];
+function update() {
+  cleanTable();
+  browser.tabs.query({currentWindow: true}).then(tabs => {
+    tabs_cache = tabs;
+    buildTable(tabs);
+  });
+};
+
+function buildTable(tabs) {
+  var table = document.getElementById("tabs_table");
+
+  var table_headers = ["#", "X", "★", "", "Title & URL"];
   createHeaderRow(table, table_headers);
 
   var pinned_tabs = [];
   var not_pinned_tabs = [];
   for (let tab of tabs) {
-    if (tab.pinned) {
-      pinned_tabs.push(tab);
-    } else {
-      not_pinned_tabs.push(tab);
+    if (!document.getElementById("filter").value || RegExp(document.getElementById("filter").value).exec(tab.url)) {
+      if (tab.pinned) {
+        pinned_tabs.push(tab);
+      } else {
+        not_pinned_tabs.push(tab);
+      }
     }
   }
 
@@ -62,6 +74,7 @@ function createTabRow(table, title, url, index, id, favIconUrl) {
 
   getNewTabCell(row).appendChild(createActivateButton(index, id));
   getNewTabCell(row).appendChild(createCloseButton(id));
+  getNewTabCell(row).appendChild(createBookmarkButton(url));
   getNewTabCell(row).appendChild(createFavicon(favIconUrl));
 
   cell = getNewTabCell(row);
@@ -82,6 +95,10 @@ function onActivateButtonAction() {
 
 function onCloseButtonAction() {
   browser.tabs.remove(parseInt(this.name)).then(() => {this.disabled = true});
+}
+
+function onBookmarkButtonAction() {
+  browser.bookmarks.create({url: this.name}).then(() => {this.textContent = "★"});
 }
 
 function createButton(name, text, handler) {
@@ -105,6 +122,10 @@ function createCloseButton(id) {
                       onCloseButtonAction);
 }
 
+function createBookmarkButton(url) {
+  return createButton(url, '☆', onBookmarkButtonAction);
+}
+
 function createTitle(title) {
   return document.createTextNode(title);
 }
@@ -123,4 +144,11 @@ function createFavicon(url) {
   img.height = 16;
   img.width = 16;
   return img;
+}
+
+function cleanTable() {
+  var table = document.getElementById("tabs_table");
+  while (table.firstChild) {
+    table.removeChild(table.firstChild);
+  }
 }
