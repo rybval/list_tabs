@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
+## 2.0.0 — 2018.09.30
+### Changed
+- The extension migrated from Add-on API to WebExtension API.
+
 ## 1.3 — 2016.12.29
 ### Added
 - Column with favicons.

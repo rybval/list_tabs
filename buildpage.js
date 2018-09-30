@@ -1,5 +1,8 @@
-self.port.on("tabs", createTable);
-self.port.on("favicon", onFavicon);
+let tabs_cache;
+browser.tabs.query({currentWindow: true}).then(tabs => {
+  tabs_cache = tabs;
+  createTable(tabs);
+});
 
 function createTable(tabs) {
   var table = document.createElement("table");
@@ -49,17 +52,17 @@ function createSeparatorRow(table, text, cols) {
 function createBunchOfTabRows(table, tabs) {
   for (let i = 0; i < tabs.length; i++) {
     let tab = tabs[i];
-    createTabRow(table, tab.title, tab.url, i, tab.id);
+    createTabRow(table, tab.title, tab.url, i, tab.id, tab.favIconUrl);
   }
 }
 
-function createTabRow(table, title, url, index, id) {
+function createTabRow(table, title, url, index, id, favIconUrl) {
   var row = table.insertRow(-1);
   row.classList.add("tab");
 
   getNewTabCell(row).appendChild(createActivateButton(index, id));
   getNewTabCell(row).appendChild(createCloseButton(id));
-  getNewTabCell(row).appendChild(createFavicon(url));
+  getNewTabCell(row).appendChild(createFavicon(favIconUrl));
 
   cell = getNewTabCell(row);
   cell.appendChild(createTitle(title));
@@ -74,12 +77,11 @@ function getNewTabCell(row) {
 }
 
 function onActivateButtonAction() {
-  self.port.emit("activate", this.name);
+  browser.tabs.update(parseInt(this.name), {active: true});
 }
 
 function onCloseButtonAction() {
-  self.port.emit("close", this.name);
-  this.disabled = true;
+  browser.tabs.remove(parseInt(this.name)).then(() => {this.disabled = true});
 }
 
 function createButton(name, text, handler) {
@@ -117,17 +119,8 @@ function createURL(url) {
 
 function createFavicon(url) {
   var img = document.createElement("img");
-  img.id = url;
-  img.src = "";
+  img.src = url;
   img.height = 16;
   img.width = 16;
-  self.port.emit("getFavicon", url);
   return img;
-}
-
-function onFavicon(obj) {
-  console.log("onFavicon called");
-  img = document.getElementById(obj.url);
-  img.id = null;
-  img.src = obj.favicon;
 }

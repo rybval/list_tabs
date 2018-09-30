@@ -1,7 +1,0 @@
-*.xcf
-*.xpi
-.gitignore
-.jpmignore
-.git/
-screenshot.png
-demo_urls.txt
