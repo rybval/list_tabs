@@ -1,18 +1,55 @@
 let tabs_cache;
-browser.tabs.query({currentWindow: true}).then(tabs => {
-  tabs_cache = tabs;
-  buildTable(tabs);
-});
+let fileWithURLs = null;
 
-document.getElementById('update').onclick = update;
+function createFile(tabs) {
+  text = "";
+  for (let tab of tabs) {
+    text += tab.url + '\n';
+  }
+
+  var data = new Blob([text], {type: 'text/plain'});
+
+  if (fileWithURLs !== null) {
+    window.URL.revokeObjectURL(fileWithURLs);
+  }
+
+  fileWithURLs = window.URL.createObjectURL(data);
+};
+
+function prepareTabs(tabs) {
+  tabs_cache = tabs;
+
+  if (document.getElementById("filter").value) {
+    tabs = tabs.filter(tab => RegExp(document.getElementById("filter").value).exec(tab.url));
+  }
+
+  if (document.getElementById('sort').checked) {
+    tabs.sort((tab1, tab2) => {
+      if (tab1.url < tab2.url) {
+        return -1;
+      }
+      if (tab1.url > tab2.url) {
+        return 1;
+      }
+      return 0;
+    });
+  }
+
+  buildTable(tabs);
+  createFile(tabs);
+  document.getElementById('save').href = fileWithURLs;
+}
 
 function update() {
   cleanTable();
   browser.tabs.query({currentWindow: true}).then(tabs => {
-    tabs_cache = tabs;
-    buildTable(tabs);
+    prepareTabs(tabs);
   });
 };
+
+document.getElementById('update').onclick = update;
+
+update();
 
 function buildTable(tabs) {
   var table = document.getElementById("tabs_table");
@@ -23,12 +60,10 @@ function buildTable(tabs) {
   var pinned_tabs = [];
   var not_pinned_tabs = [];
   for (let tab of tabs) {
-    if (!document.getElementById("filter").value || RegExp(document.getElementById("filter").value).exec(tab.url)) {
-      if (tab.pinned) {
-        pinned_tabs.push(tab);
-      } else {
-        not_pinned_tabs.push(tab);
-      }
+    if (tab.pinned) {
+      pinned_tabs.push(tab);
+    } else {
+      not_pinned_tabs.push(tab);
     }
   }
 
