@@ -2,7 +2,7 @@
     "name": "List tabs",
     "description": "Lists all tabs",
     "manifest_version": 2,
-    "version": "2.0.0",
+    "version": "2.0.1",
     "icons": {
         "32": "icons/icon-32.png",
         "48": "icons/icon-48.png",
@@ -17,5 +17,10 @@
             "32": "icons/icon-32.png"
         }
     },
-    "author": "Valentine Rybin"
+    "author": "Valentine Rybin",
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "@list_tabs"
+        }
+    }
 }

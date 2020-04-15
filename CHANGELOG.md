@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
+## 2.0.1 — 2020.04.15
+### Added
+- Extension ID into `manifest.json`
+
 ## 2.0.0 — 2018.09.30
 ### Changed
 - The extension migrated from Add-on API to WebExtension API.
@@ -17,7 +21,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [1.2] — 2016-12-20
 ### Changed
-- Table now stretchs to the window width.
+- Table now stretches to the window width.
 - Some changes in table style.
 - Close tab button moved to the left.
 
@@ -38,7 +42,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## 1.0 — 2016-12-12
 ### Added
-- Page, contaning table with information about tabs and some tools.
+- Page, containing table with information about tabs and some tools.
 
 [1.2]: https://github.com/rybval/list_tabs/compare/v1.1...v1.2
 [1.1]: https://github.com/rybval/list_tabs/compare/v1.0...v1.1
