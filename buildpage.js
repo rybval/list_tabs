@@ -1,6 +1,18 @@
 let tabs_cache;
+
 browser.tabs.query({currentWindow: true}).then(tabs => {
   tabs_cache = tabs;
+  let download_link = document.getElementById('download_json');
+  let serialized_tabs = JSON.stringify(tabs, ["title", "url"], 2);
+  download_link.setAttribute(
+    'href',
+    'data:application/json;charset=utf-8,' + encodeURIComponent(serialized_tabs)
+  );
+  download_link.setAttribute(
+    'download',
+    `list_tabs_${(new Date()).toISOString()}.json`
+  );
+
   createTable(tabs);
 });
 
