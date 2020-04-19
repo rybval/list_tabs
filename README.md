@@ -12,8 +12,9 @@ Displaying info:
 Available operations:
 
 - make active
+- create a bookmark
 - close
 
 Screenshot:
 
-![Screenshot](https://raw.githubusercontent.com/rybval/list_tabs/024a66cd5640d9bfba6930b40600ce81bb00d395/screenshot.png "Screenshot")
+![Screenshot](https://raw.githubusercontent.com/rybval/list_tabs/e42fa920e857b68d7a51881ca4a17f41171e8320/screenshot.png)
