@@ -1,4 +1,6 @@
 let tabs_cache;
+let star = "\u2606";
+let cross = "\u2A2F";
 
 browser.tabs.query({currentWindow: true}).then(tabs => {
   tabs_cache = tabs;
@@ -19,7 +21,7 @@ browser.tabs.query({currentWindow: true}).then(tabs => {
 function createTable(tabs) {
   var table = document.createElement("table");
 
-  var table_headers = ["#", "X", "", "Title & URL"];
+  var table_headers = ["#", star, cross, "", "Title & URL"];
   createHeaderRow(table, table_headers);
 
   var pinned_tabs = [];
@@ -73,6 +75,7 @@ function createTabRow(table, title, url, index, id, favIconUrl) {
   row.classList.add("tab");
 
   getNewTabCell(row).appendChild(createActivateButton(index, id));
+  getNewTabCell(row).appendChild(createBookmarkButton(id));
   getNewTabCell(row).appendChild(createCloseButton(id));
   getNewTabCell(row).appendChild(createFavicon(favIconUrl));
 
@@ -92,6 +95,20 @@ function onActivateButtonAction() {
   browser.tabs.update(parseInt(this.name), {active: true});
 }
 
+function onBookmarkButtonAction() {
+  browser.tabs.get(
+    parseInt(this.name),
+    (tab) => {
+      browser.bookmarks.create({
+        title: tab.title,
+        url: tab.url
+      }).then(
+        () => {this.disabled = true}
+      );
+    }
+  );
+}
+
 function onCloseButtonAction() {
   browser.tabs.remove(parseInt(this.name)).then(() => {this.disabled = true});
 }
@@ -106,15 +123,15 @@ function createButton(name, text, handler) {
 }
 
 function createActivateButton(index, id) {
-  return createButton("" + id,
-                      "" + index,
-                      onActivateButtonAction);
+  return createButton("" + id, "" + index, onActivateButtonAction);
+}
+
+function createBookmarkButton(id) {
+  return createButton("" + id, star, onBookmarkButtonAction);
 }
 
 function createCloseButton(id) {
-  return createButton("" + id,
-                      "X",
-                      onCloseButtonAction);
+  return createButton("" + id, cross, onCloseButtonAction);
 }
 
 function createTitle(title) {
