@@ -14,7 +14,9 @@ Available operations:
 - make active
 - create a bookmark
 - close
+- download all the tabs' urls and titles as a JSON file
+- close all duplicates
 
 Screenshot:
 
-![Screenshot](https://raw.githubusercontent.com/rybval/list_tabs/e42fa920e857b68d7a51881ca4a17f41171e8320/screenshot.png)
+![Screenshot](https://raw.githubusercontent.com/rybval/list_tabs/v2.1.0/screenshot.png)

@@ -18,6 +18,8 @@ browser.tabs.query({currentWindow: true}).then(tabs => {
   createTable(tabs);
 });
 
+document.getElementById('close_duplicates').onclick = closeDuplicates;
+
 function createTable(tabs) {
   var table = document.createElement("table");
 
@@ -152,4 +154,16 @@ function createFavicon(url) {
   img.height = 16;
   img.width = 16;
   return img;
+}
+
+function closeDuplicates() {
+  let urls = new Set();
+  for (let tab of tabs_cache) {
+    if (urls.has(tab.url)) {
+      browser.tabs.remove(tab.id);
+    } else {
+      urls.add(tab.url);
+    }
+  }
+  document.location.reload(true);
 }

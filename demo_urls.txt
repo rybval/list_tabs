@@ -4,4 +4,4 @@ https://www.mozilla.org/en-US/
 https://developer.mozilla.org/en-US/
 https://www.mozilla.org/en-US/firefox/developer/
 https://addons.mozilla.org/en-US/firefox/addon/list-tabs/
-https://developer.mozilla.org/en-US/Add-ons/SDK/High-Level_APIs/tabs#close(callback)
+https://developer.mozilla.org/en-US/Add-ons/SDK/High-Level_APIs/tabs

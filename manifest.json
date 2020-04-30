@@ -1,8 +1,8 @@
 {
-    "name": "List tabs",
+    "name": "List Tabs",
     "description": "Lists all tabs",
     "manifest_version": 2,
-    "version": "2.0.2",
+    "version": "2.1.0",
     "icons": {
         "32": "icons/icon-32.png",
         "48": "icons/icon-48.png",
